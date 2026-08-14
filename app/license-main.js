@@ -45,6 +45,6 @@ async function startFixedSet(){
 }
 
 async function installFixedCatalog(){
-  try{const d=await api({action:'catalog'});catalog=Object.fromEntries((d.products||[]).map(x=>[x.product_code,x]));document.querySelectorAll('[data-product]').forEach(b=>{const x=catalog[b.dataset.product];if(x){const small=b.querySelector('small');if(small)small.textContent=`${x.total_question_count} questions · ${x.set_count} sets`}b.onclick=()=>chooseFromFixedCatalog(b.dataset.product)});const recent=latestProgress(),resume=$('licenseResumeButton');if(resume&&recent)resume.onclick=async()=>{await chooseFromFixedCatalog(recent.code,recent.data.index);await startFixedSet()}}catch(e){console.error('License catalog:',e)}
+  try{const d=await api({action:'catalog'});catalog=Object.fromEntries((d.products||[]).map(x=>[x.product_code,x]));document.querySelectorAll('[data-product]').forEach(b=>{const x=catalog[b.dataset.product];if(x){const small=b.querySelector('small');if(small)small.textContent=`${x.total_question_count} questions · ${x.set_count} sets`}b.onclick=()=>chooseFromFixedCatalog(b.dataset.product)});document.documentElement.dataset.licenseCatalogReady='1';const recent=latestProgress(),resume=$('licenseResumeButton');if(resume&&recent)resume.onclick=async()=>{await chooseFromFixedCatalog(recent.code,recent.data.index);await startFixedSet()}}catch(e){console.error('License catalog:',e)}
 }
 document.addEventListener('DOMContentLoaded',installFixedCatalog);if(document.readyState!=='loading')installFixedCatalog();
