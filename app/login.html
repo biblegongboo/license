@@ -415,7 +415,10 @@
                     showResult('loginResult', '❌ ' + msg, false);
                 }
             } catch (err) {
-                showResult('loginResult', '❌ Server error: ' + err.message, false);
+                const message = /email not confirmed/i.test(String(err && err.message || ''))
+                    ? '⏳ Your paid course is awaiting administrator approval. You may use the free sample without logging in.'
+                    : '❌ Server error: ' + err.message;
+                showResult('loginResult', message, false);
             }
         });
 
@@ -530,7 +533,7 @@
                         './login.html?signup=success&email=' +
                         encodeURIComponent(email);
                 } else {
-                    showResult('signupResult', '✅ Registration received. Please confirm your email.', true);
+                    showResult('signupResult', '✅ Registration received. You may use the free sample now. Paid course login will be enabled after administrator approval.', true);
                 }
             } catch (err) {
                 showResult('signupResult', '❌ Server error: ' + err.message, false);
