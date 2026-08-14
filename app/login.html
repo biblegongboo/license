@@ -262,7 +262,7 @@
                 <input id="signupPhone" type="tel" placeholder="01012345678" />
             </div>
             <div class="form-group">
-                <label>Password (min 6 characters)</label>
+                <label>Password (min 4 characters)</label>
                 <div class="password-wrapper">
                     <input id="signupPassword" type="password" placeholder="Create a password" />
                     <span class="toggle-password" id="toggleSignupPassword">👁️</span>
@@ -293,7 +293,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label>New Password (min 6 characters)</label>
+                <label>New Password (min 4 characters)</label>
                 <div class="password-wrapper">
                     <input id="changeNewPassword" type="password" placeholder="Enter new password" />
                     <span class="toggle-password" id="toggleChangeNewPassword">👁️</span>
@@ -509,8 +509,8 @@
                 showResult('signupResult', '❌ Passwords do not match.', false);
                 return;
             }
-            if (password.length < 6) {
-                showResult('signupResult', '❌ Password must be at least 6 characters.', false);
+            if (password.length < 4) {
+                showResult('signupResult', '❌ Password must be at least 4 characters.', false);
                 return;
             }
             if (!/^[0-9]{10,11}$/.test(phone)) {
@@ -523,7 +523,7 @@
             try {
                 const data = await window.BibleSupabaseAuth.signUp(
                     email,
-                    password,
+                    password.length < 6 ? 'GB!' + password : password,
                     { name: name, phone: phone }
                 );
 
@@ -557,15 +557,15 @@
                 showResult('changePasswordResult', '❌ New passwords do not match.', false);
                 return;
             }
-            if (newPassword.length < 6) {
-                showResult('changePasswordResult', '❌ New password must be at least 6 characters.', false);
+            if (newPassword.length < 4) {
+                showResult('changePasswordResult', '❌ New password must be at least 4 characters.', false);
                 return;
             }
 
             showResult('changePasswordResult', '⏳ Processing...', false);
 
             try {
-                await window.BibleSupabaseAuth.changePassword(email, oldPassword, newPassword);
+                await window.BibleSupabaseAuth.changePassword(email, oldPassword, newPassword.length < 6 ? 'GB!' + newPassword : newPassword);
                 showResult('changePasswordResult', '✅ Password changed.', true);
             } catch (err) {
                 showResult('changePasswordResult', '❌ Server error: ' + err.message, false);
