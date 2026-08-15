@@ -2069,6 +2069,7 @@ html:not(.admin-user) .admin-preview-panel {
   .bible-speech-controls .bible-speech-auto-next{font-size:17px!important}
   .bible-speech-controls .bible-speech-speed{padding:0 3px!important;font-size:11px!important;text-align:center}
   .mode-btn.active,
+  .bible-speech-button.active,
   .bible-passage-toggle.is-on,.bible-quiz-toggle.is-on,
   .bible-passage-toggle[aria-pressed="true"],.bible-quiz-toggle[aria-pressed="true"],
   .bible-speech-auto-next[aria-pressed="true"],
@@ -2338,14 +2339,18 @@ html:not(.admin-user) .admin-preview-panel {
 
 <style>
   .mode-btn.active,
-  .mode-btn[aria-pressed="true"] {
+  .mode-btn[aria-pressed="true"],
+  .bible-speech-button.active,
+  .bible-speech-button[aria-pressed="true"] {
     background:#123a67!important;
     color:#fff!important;
     border-color:#071f38!important;
     box-shadow:inset 0 0 0 2px rgba(255,255,255,.22),0 3px 9px rgba(7,31,56,.38)!important;
   }
   .mode-btn.active:hover,
-  .mode-btn[aria-pressed="true"]:hover {
+  .mode-btn[aria-pressed="true"]:hover,
+  .bible-speech-button.active:hover,
+  .bible-speech-button[aria-pressed="true"]:hover {
     background:#123a67!important;
     color:#fff!important;
     border-color:#071f38!important;
