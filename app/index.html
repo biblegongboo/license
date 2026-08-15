@@ -2260,7 +2260,10 @@ html:not(.admin-user) .admin-preview-panel {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           problemNumber: problemNumber,
-          question: question,
+          question: 'Answer only in the same language used in the learner question below.\n\n' + question,
+          learnerQuestion: question,
+          responseLanguage: 'same-as-question',
+          responseInstruction: 'Answer only in the same language used by the learner. Do not switch languages.',
           context: (typeof window.getCurrentQuestionContext === 'function')
             ? window.getCurrentQuestionContext()
             : null,
@@ -2361,5 +2364,5 @@ html:not(.admin-user) .admin-preview-panel {
   }
 </style>
 <link rel="stylesheet" href="https://biblegongboo.github.io/gongboo-shared/navigator.css?v=6">
-<script type="module" src="./license-main.js?v=license-native-host-tts1"></script>
+<script type="module" src="./license-main.js?v=license-set-tutor2"></script>
 <script src="https://biblegongboo.github.io/gongboo-shared/navigator.js?v=6"></script>
